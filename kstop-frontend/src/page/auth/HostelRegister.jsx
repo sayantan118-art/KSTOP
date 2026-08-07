@@ -31,7 +31,6 @@ export default function HostelRegister() {
   const navigate = useNavigate();
   const [form, setForm] = useState({
     hostelName: "",
-    wardenName: "",
     email: "",
     phone: "",
     password: "",
@@ -53,7 +52,6 @@ export default function HostelRegister() {
 
   function validate() {
     const next = {};
-    if (!form.wardenName.trim()) next.wardenName = "Warden name is required.";
     if (!form.email.trim()) next.email = "Email is required.";
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) next.email = "Enter a valid email address.";
     if (!form.phone.trim()) next.phone = "Phone number is required.";
@@ -102,7 +100,6 @@ export default function HostelRegister() {
         <div style={styles.headingBlock}>
           <span style={styles.rolePill}>Hostel Registration</span>
           <h1 style={styles.title}>Register the hostel account.</h1>
-          <p style={styles.subtitle}>Use a separate hostel registration form to create the warden access account.</p>
         </div>
 
         <form onSubmit={handleSubmit} style={styles.form} noValidate>
@@ -126,22 +123,18 @@ export default function HostelRegister() {
             />
           </div>
 
-          <Field
-            label="Warden name"
-            name="wardenName"
-            type="text"
-            placeholder="Full name"
-            value={form.wardenName}
-            onChange={handleChange}
-            error={errors.wardenName}
-          />
+          <div style={styles.noticeBlock}>
+            <p style={styles.noticeText}>
+              Register the hostel account here. Warden access is linked to the hostel account rather than a specific individual.
+            </p>
+          </div>
 
           <div style={styles.row}>
             <Field
               label="Email"
               name="email"
               type="email"
-              placeholder="warden@kiit.ac.in"
+              placeholder="hostel@kiit.ac.in"
               value={form.email}
               onChange={handleChange}
               error={errors.email}
@@ -343,6 +336,18 @@ const styles = {
     margin: "0.75rem 0 0",
     color: "#CCC5B9",
     fontSize: "0.95rem",
+    lineHeight: 1.6,
+  },
+  noticeBlock: {
+    padding: "1rem",
+    borderRadius: "0.75rem",
+    background: "rgba(235,94,40,0.1)",
+    border: "1px solid rgba(235,94,40,0.2)",
+    color: "#F8EDEB",
+  },
+  noticeText: {
+    margin: 0,
+    fontSize: "0.92rem",
     lineHeight: 1.6,
   },
   form: {
